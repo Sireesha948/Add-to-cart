@@ -1,0 +1,68 @@
+<ng-container *ngIf = "product.length !=0">
+
+    <div class="container">
+        <div class="card-table">
+            <div class="cart-product">
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Product Name</th>
+                            <th>Product Image</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+    
+                    </thead>
+                    <tbody>
+                        <tr *ngFor = "let item of product; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.title}}</td>
+                            <td><img style = "width: 120px;" src="{{item.image}}" alt = ""></td>
+                            <td style = "width:25%;">{{item.description}}</td>
+                            <td style = "width:12%;">{{item.price}}</td>
+                            <td style = "width:12%;">{{item.quantity}}</td>
+                            <td style = "width:12%;">{{item.total}}</td>
+                            <td>
+                                <button (click) = "removeItem(item)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4"></td>
+                            <td><button (click) = "emptycart()" class="btn btn-danger">Empty Cart</button></td>
+                            <td><button routerLink = "/products" class="btn btn-primary">Shop More</button></td>
+                            <!-- <td><button class="btn btn-success">Checkout</button></td> -->
+                            <td><strong>Grand Total : ${{grandTotal}}</strong></td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</ng-container>
+
+
+
+
+
+<ng-container *ngIf = "product.length == 0">
+     
+    <div class="container">
+        <div class="card">
+             <h5 class="card-title">My Cart</h5>
+        </div>
+        <div class="center">
+            <img src="data:image/png;base64,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" alt="">
+            <h4> Your cart is empty!</h4>
+            <h6>Add item to it now</h6>
+            <button routerLink = "/products" class="btn btn-primary">Shop Now</button>
+        </div>
+    </div>
+
+</ng-container>
